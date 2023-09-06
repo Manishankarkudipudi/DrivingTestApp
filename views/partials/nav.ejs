@@ -1,0 +1,37 @@
+<% if (req.session.user) { %>
+    <!-- Show the header with all links when the user is logged in -->
+    <header>
+        <nav>
+            <h1><a href="/">Book Drive Test</a></h1>
+            <ul>
+
+                <!-- Add Examiner Tab for Examiner -->
+                <% if (req.session.user && req.session.user.userType === 'Examiner') { %>
+                    <li><a href="/examiner">Examiner</a></li>
+                    <% }  else if (req.session.user && req.session.user.userType === 'Admin') { %>
+                        <li><a href="/appointment">Appointment</a></li>
+                        <li><a href="/admin">View Drivers</a></li>
+
+                        <% } else { %>
+                            <li><a href="/dashboard">Dashboard</a></li>
+                            <li><a href="/g2Page">G2 Page</a></li>
+                            <li><a href="/gpage">G Page</a></li>
+                            <% } %>
+                                <!-- Add Logout link here if applicable -->
+                                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+        <div class="welcome-text">Welcome to Drive Test</div>
+    </header>
+    <% } else { %>
+        <!-- Show the header with only Login and Home links when the user is not logged in -->
+        <header>
+            <nav>
+                <h1><a href="/">Book Drive Test</a></h1>
+                <ul>
+                    <li><a href="/login">Login</a></li>
+                </ul>
+            </nav>
+            <div class="welcome-text">Welcome to Drive Test</div>
+        </header>
+        <% } %>

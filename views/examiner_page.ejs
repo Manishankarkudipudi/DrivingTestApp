@@ -1,0 +1,93 @@
+<!-- examiner_page.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+
+    <body>
+        <%- include('./partials/nav.ejs', { authenticated: false }) %>
+            <div id="container">
+                <h1>Examiner Page</h1>
+            </div>
+            <div id="login_container">
+                <article class="mb-4">
+                    <div class="container px-4 px-lg-5">
+                        <div class="row gx-4 gx-lg-5 justify-content-center">
+                            <div class="col-md-10 col-lg-8 col-xl-7">
+                                <form action="/examiner" method="get">
+                                    <label class="my-3" for="testType">Filter by Test Type:</label>
+                                    <div class="form-floating mb-5">
+                                        <select class="form-select my-3" name="testType" id="testType">
+                                    <option value="G2">G2</option>
+                                    <option value="G">G</option>
+                                </select>
+                                        <button class="btn btn-primary text-uppercase" type="submit">Apply Filter</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <% if (testTypeFilter) { %>
+                    <ul>
+                        <% users.forEach(user_details => { %>
+                            <li>
+                                <fieldset>
+                                    <legend>Personal Information</legend>
+                                    <div class="form-floating mb-5">
+                                        <input class="form-control" name="fName" id="fName" type="text" value="<%= user_details.fname %>" placeholder="Enter your name..." readonly />
+                                        <label for="name">First Name</label>
+
+                                    </div>
+                                    <div class="form-floating mb-5">
+                                        <input class="form-control" name="make" id="make" type="text" value="<%= user_details.carDetails.make %>" readonly />
+                                        <label for="make">Make</label>
+
+                                    </div>
+                                    <div class="form-floating mb-5">
+                                        <input class="form-control" name="model" id="model" type="text" value="<%= user_details.carDetails.model %>" readonly />
+                                        <label for="model">Model</label>
+
+                                    </div>
+                                    <% if (user_details.examinerComment) { %>
+                                        <div class="form-floating mb-5">
+                                            <input class="form-control" name="examinerComment" id="examinerComment" type="text" value="<%= user_details.examinerComment %>" readonly />
+                                            <label for="examinerComment">Examiner Comment</label>
+
+                                        </div>
+                                        <% } %>
+                                            <div class="form-floating mb-5">
+                                                <input class="form-control" name="isPassed" id="isPassed" type="text" value="<%= user_details.isPassed %>" readonly />
+                                                <label for="isPassed">Status</label>
+
+                                            </div>
+                                </fieldset>
+
+                                <!-- Display examiner comment and pass/fail status if available -->
+
+
+                                <!-- Add buttons to add comments and mark as pass/fail -->
+                                <form action="/addCommentAndStatus" method="post">
+                                    <input type="hidden" name="userId" value="<%= user_details._id %>">
+                                    <div class="form-floating mb-5">
+                                        <input class="form-control" name="comment" id="comment" type="text" />
+                                        <label for="comment">Examiner Comment:</label>
+
+                                    </div>
+                                    <div class="form-floating mb-5">
+                                        <select class="form-select my-3" name="Status" id="Status">
+                            <option value="pass">Pass</option>
+                            <option value="fail">Fail</option>
+                        </select>
+                                        <button class="btn btn-primary text-uppercase" type="submit">Update</button>
+                                    </div>
+
+                                </form>
+                            </li>
+                            <% }); %>
+                    </ul>
+                    <% } %>
+            </div>
+            <%- include('./partials/footer.ejs') %>
+    </body>
+
+</html>

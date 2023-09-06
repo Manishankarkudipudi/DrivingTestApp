@@ -1,0 +1,379 @@
+/* Reset some default browser styles */
+
+/* login.ejs */
+body, h1, p, button {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #343a40;
+    padding: 1rem 2rem;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    display: inline-block;
+}
+
+.navbar a:hover {
+    background-color: #495057;
+}
+
+/* Login container */
+#login_container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 2rem;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+#login_container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+    text-align: center;
+}
+
+.alert {
+    padding: 1rem;
+    background-color: #f8d7da;
+    color: #721c24;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+}
+
+.alert-danger p.error-message {
+    margin: 0;
+}
+
+.form-floating {
+    position: relative;
+}
+
+.form-control {
+    padding: 0.75rem 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 1rem;
+    height:60px;
+    background-color: #E8F0FE;
+}
+
+.form-floating > label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: white;
+    padding: 0 0.5rem;
+    font-size: 0.9rem;
+    transform: translateY(-50%);
+    z-index: 1;
+    color: #888;
+}
+
+button.btn {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin-right: 15px;
+    margin-bottom: 15px; /* Added this line to give space between vertically stacked buttons */
+}
+
+
+button.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Footer */
+footer {
+    padding: 1rem 0;
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    margin-top: 190px;
+}
+
+footer a {
+    color: #007bff;
+}
+
+footer a:hover {
+    color: #0056b3;
+}
+.invalid-feedback {
+    display: none;
+}
+
+/* Styling for the form input labels */
+form .form-floating > label {
+    color: #555;
+    padding: 5px;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+/* Styling for the signup link */
+.signup-link {
+    color: #007bff;
+    font-weight: bold;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.3s, color 0.3s;
+}
+
+.signup-link:hover {
+    border-bottom: 2px solid #007bff;
+    color: #0056b3; /* A shade darker for hover effect */
+}
+.form-floating > label {
+    position: relative;
+    top: auto;
+    left: auto;
+    z-index: 0;
+    display: block;
+    width: 100%;
+    margin-bottom: 1em;
+    pointer-events: auto;
+    cursor: auto;
+    font-size: 1rem;
+    transition: none;
+    color: #495057;
+}
+
+/* ------------------------------------------------------------------------- */
+/* nav.ejs */
+
+/* Base Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f3f4f6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #007bff;
+}
+
+
+header {
+    position: relative; /* Makes the header a positioning context */
+    background-color: #343a40;
+    padding: 10px 20px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+    height: 400px;
+}
+
+.welcome-text {
+    position: absolute; /* Absolutely positions the text within the header */
+    top: 50%; /* Positions the top edge of the text to the middle of the header */
+    left: 50%; /* Positions the left edge of the text to the middle of the header */
+    transform: translate(-50%, -50%); /* Offsets the text by half its width and height to center it */
+    font-size: 2.5rem; /* Adjust as needed */
+    color: #fff; /* Making the text color white for visibility against the dark header background */
+}
+
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav h1 {
+    margin: 0;
+    color: #fff;
+    font-size: 24px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+nav li {
+    margin: 0 10px;
+}
+
+nav li a {
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+nav li a:hover {
+    background-color: #495057;
+}
+
+/* Special styles for the logout button to make it stand out */
+nav li a[href="/logout"] {
+    background-color: #dc3545;
+    padding: 5px 15px;
+    border-radius: 4px;
+}
+
+nav li a[href="/logout"]:hover {
+    background-color: #c82333;
+}
+
+/* appointments */
+
+
+.centered-title {
+    text-align: center;
+}
+.date-col {
+    width: 90%; 
+    text-align: left; 
+    padding-left: 15px; 
+}
+
+.time-col {
+    width: 100%; 
+}
+table tr {
+    height: 50px; /* or whatever height you prefer */
+}
+
+.success-message {
+    color: green;
+    font-weight: bold;
+    border: 1px solid green;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+/* adminpage */
+
+
+#container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+#login_container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f0f0f0;
+    color: #555;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+table td {
+    color: #666;
+}
+
+.admin_page {
+    margin-top: 30px;
+}
+
+table tr:hover {
+    background-color: #f8f8f8;
+}
+/* dashboard */
+
+#container2 {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.dashboard_section2 {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h2 {
+    font-size: 20px;
+    color: #34495e;
+    margin-bottom: 15px;
+}
+
+i {
+    color: #7f8c8d;
+}
+
+b {
+    font-weight: 700;
+    color: #e74c3c;
+}

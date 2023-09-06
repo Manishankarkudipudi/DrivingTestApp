@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+
+
+    <body>
+        <%- include('./partials/nav.ejs', { authenticated: false }) %>
+            <div id="container">
+                <h1>G2 page</h1>
+            </div>
+            <div id="login_container">
+                <% if (locals.user_details) { %>
+                    <div class="alert alert-success" role="alert">
+                        <p>Data saved successfully!</p>
+                    </div>
+                    <% }else { %>
+                        <div class="my-5 px-4">
+
+                            <form id="contactForm" action="/licenseDetails" method="post">
+                                <fieldset>
+                                    <legend>Personal Information</legend>
+                                    <div class="form-floating mb-4">
+                                        <input class="form-control" type="text" name="fname" id="fname" placeholder="First name" required>
+                                        <label for="fname">First Name</label>
+
+                                    </div>
+                                    <div class="form-floating mb-4">
+                                        <input class="form-control" type="text" name="lname" id="lname" placeholder="Last name" required>
+
+                                        <label for="name">Last Name</label>
+
+
+                                    </div>
+                                    <div class="form-floating mb-4">
+                                        <input class="form-control" type="text" name="lNo" id="lNo" placeholder="License no" required>
+
+                                        <label for="license">License Number</label>
+
+                                    </div>
+                                    <div class="form-floating mb-4">
+                                        <input class="form-control" type="number" name="age" id="age" placeholder="Age" required>
+                                        <label for="age">Age</label>
+
+                                    </div>
+                                    <div class="form-floating mb-4">
+                                        <input class="form-control" type="text" name="dob" id="dob" placeholder="DOB" required>
+                                        <label for="DOB">Date of Birth</label>
+
+                                    </div>
+                                </fieldset>
+                                <br />
+                                <fieldset>
+                                    <legend>Car Details</legend>
+                                    <div class="form-floating mb-4">
+                                        <input type="text" class="form-control" name="c_make" id="c_make" placeholder="Make" required>
+                                        <label for="make">Car make</label>
+                                    </div>
+
+                                    <div class="form-floating mb-4">
+                                        <input type="text" class="form-control" name="c_model" id="c_model" placeholder="Model" required>
+                                        <label for="model">Car model</label>
+                                    </div>
+
+                                    <div class="form-floating mb-4">
+                                        <input type="number" class="form-control" name="c_year" id="c_year" placeholder="Year" required>
+                                        <label for="c_year">Year of manufacture</label>
+                                    </div>
+                                    <div class="form-floating mb-4">
+                                        <input type="text" class="form-control" name="plateNo" id="plateNo" placeholder="Plate No" required>
+                                        <label for="plateNo">Plate No</label>
+                                    </div>
+                                    <div class="form-floating mb-4">
+                                        <input type="date" class="form-control" name="appointmentDate" id="appointmentDate" required>
+                                        <label>Select Appointment Date</label>
+                                    </div>
+                                    <div class="form-floating mb-4">
+
+                                        <div id="availableAppointments">
+                                            <label>Select Appointment Time:</label>
+                                            <select class="form-select" id="appointmentTime" name="time" required>
+                                <option value="" selected>Select an appointment time</option>
+                            </select>
+                                            <input type="hidden" id="selectedAppointmentTime" name="selectedAppointmentTime" value="">
+
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <br />
+
+                                <!-- Submit Button-->
+                                <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">
+                    SUBMIT
+                </button>
+                            </form>
+                        </div>
+
+                        <% } %>
+
+            </div>
+            <%- include('./partials/footer.ejs') %>
+
+    </body>
+
+
+    <script>
+        document.getElementById('availableAppointments').style.display = "none";
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateInput = document.getElementById('appointmentDate');
+            const appointmentTimeDropdown = document.getElementById('appointmentTime');
+
+            dateInput.addEventListener('change', () => {
+                const selectedDate = dateInput.value;
+
+                fetch('/getAvailableAppointments', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            date: selectedDate
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+
+                        // Clear the previous dropdown options
+                        appointmentTimeDropdown.innerHTML =
+                            '<option value="" selected>Select an appointment time</option>';
+
+                        if (data && data.length > 0) {
+                            document.getElementById('availableAppointments').style.display = "block";
+
+                            data.forEach(appointment => {
+                                if (appointment.isTimeSlotAvailable) {
+                                    const option = document.createElement('option');
+                                    option.value = appointment.time;
+                                    option.textContent = `Time: ${appointment.time}`;
+                                    appointmentTimeDropdown.appendChild(option);
+                                }
+                            });
+
+                            // Enable the dropdown when there are available times
+                            appointmentTimeDropdown.disabled = false;
+                        } else {
+                            // If no available times, show a message and disable the dropdown
+                            const option = document.createElement('option');
+                            option.textContent = 'No available appointments for the selected date.';
+                            appointmentTimeDropdown.appendChild(option);
+                            appointmentTimeDropdown.disabled = true;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+
+            appointmentTimeDropdown.addEventListener('change', () => {
+                const selectedTime = appointmentTimeDropdown.value;
+                if (selectedAppointmentTime) {
+                    selectedAppointmentTime.value = selectedTime;
+                }
+
+            });
+        });
+    </script>
+
+</html>

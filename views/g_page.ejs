@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head.ejs') -%>
+
+    <body>
+        <!-- Navigation-->
+        <%- include('partials/nav.ejs') -%>
+            <!-- Page Header-->
+         
+
+            <!-- Main Content-->
+            <main class="mb-4">
+                <div class="container px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <p>To get details enter License number</p>
+                            <div class="my-5">
+
+                                <form id="contactForm" action="/showDetails" method="post">
+                                    <div class="form-floating mb-5">
+                                        <input class="form-control" placeholder="License no" name="lNo" id="lNo" />
+                                        <label for="name">License Number</label>
+
+                                    </div>
+                                    <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">
+                                SUBMIT
+                            </button>
+                                </form>
+
+                                <% if (locals.notFound) { %>
+                                    <!-- user not found message -->
+                                    <div class="alert alert-danger" role="alert">
+                                        <p>User not found.</p>
+                                    </div>
+                                    <% } else if (locals.updated) { %>
+                                        <div class="alert alert-success" role="alert">
+                                            <p>Data updated successfully!</p>
+                                        </div>
+                                        <% } %>
+                                            <%  if (locals.user_details) { %>
+                                                <form action="/updateDetails" method="post">
+                                                    <fieldset>
+                                                        <legend>Personal Information</legend>
+                                                        <div class="form-floating mb-5">
+                                                            <input class="form-control" name="fName" id="fName" type="text" value="<%= user_details.fname %>" placeholder="Enter your name..." readonly />
+                                                            <label for="name">First Name</label>
+
+                                                        </div>
+                                                        <div class="form-floating mb-5">
+                                                            <input class="form-control" name="lName" id="lName" type="text" value="<%= user_details.lname %>" placeholder="Enter your name..." readonly />
+                                                            <label for="name">Last Name</label>
+
+
+                                                        </div>
+                                                        <div class="form-floating mb-5">
+                                                            <input class="form-control" name="lNo" value="<%= user_details.licenseNo %>" id="license" type="text" placeholder="Enter your License number..." readonly />
+                                                            <label for="license">License Number</label>
+
+                                                        </div>
+                                                        <div class="form-floating mb-5">
+                                                            <input class="form-control" name="age" value="<%= user_details.age %>" id="age" type="number" placeholder="Enter your age..." />
+                                                            <label for="age">Age</label>
+
+                                                        </div>
+                                                        <div class="form-floating mb-5">
+                                                            <input class="form-control" name="dob" value="<%= user_details.dob %>" id="dob" type="text" placeholder="Enter your DOB" />
+                                                            <label for="dob">Date of Birth</label>
+
+                                                        </div>
+                                                    </fieldset>
+                                                    <br />
+                                                    <fieldset>
+                                                        <legend>Car Details</legend>
+                                                        <div class="form-floating mb-5">
+                                                            <input class="form-control" name="make" value="<%= user_details.carDetails.make %>" id="make" type="text" placeholder="Enter make" />
+                                                            <label for="make">Car make</label>
+                                                        </div>
+
+                                                        <div class="form-floating mb-5">
+                                                            <input class="form-control" id="model" value="<%= user_details.carDetails.model %>" name="model" type="text" placeholder="Enter Car model" />
+                                                            <label for="model">Car model</label>
+                                                        </div>
+
+                                                        <div class="form-floating mb-5">
+                                                            <input class="form-control" value="<%= user_details.carDetails.year %>" id="year" name="year" type="text" placeholder="Enter year of manufacture" />
+                                                            <label for="year">Year of manufacture</label>
+                                                        </div>
+                                                        <div class="form-floating mb-5">
+                                                            <input class="form-control" id="plateNo" value="<%= user_details.carDetails.plateNo %>" name="plateNo" type="text" placeholder="Enter year of manufacture" />
+                                                            <label for="plateNo">Plate No</label>
+                                                        </div>
+                                                        <% if (!user_details.examinerComment) { %>
+                                                            <% if (user_details.appointmentDate) { %>
+                                                                <div class="form-floating mb-5">
+                                                                    <input type="text" class="form-control" value="<%= user_details.appointmentDate.toDateString() %>" readonly>
+                                                                    <label>Appointment Date</label>
+                                                                </div>
+                                                                <% } %>
+
+                                                                    <% if (user_details.selectedAppointmentTime) { %>
+                                                                        <div class="form-floating mb-5">
+                                                                            <input class="form-control" type="text" value="<%= user_details.selectedAppointmentTime %>" readonly>
+                                                                            <label>Appointment Time:</label>
+                                                                        </div>
+                                                                        <% } %>
+                                                                            <% } %>
+                                                                                <% if (user_details.isPassed) { %>
+                                                                                    <div class="form-floating mb-5">
+                                                                                        <input class="form-control" type="text" value="Passed" readonly>
+                                                                                        <label>Status</label>
+                                                                                    </div>
+                                                                                    <% } else {%>
+                                                                                        <div class="form-floating mb-5">
+                                                                                            <input class="form-control" type="text" value="Failed" readonly>
+                                                                                            <label>Status</label>
+                                                                                        </div>
+                                                                                        <% } %>
+                                                                                            <% if (user_details.examinerComment) { %>
+                                                                                                <div class="form-floating mb-5">
+                                                                                                    <input class="form-control" type="text" value="<%= user_details.examinerComment %>" readonly>
+                                                                                                    <label>Comment</label>
+                                                                                                </div>
+                                                                                                <% } %>
+                                                    </fieldset>
+                                                    <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">
+                                SUBMIT
+                            </button>
+                                                </form>
+                                                <% } %>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <%- include('partials/footer.ejs') -%>
+
+    </body>
+
+</html>

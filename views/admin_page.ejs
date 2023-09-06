@@ -1,0 +1,42 @@
+<!-- admin_page.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+
+    <body>
+        <%- include('./partials/nav.ejs', { authenticated: false }) %>
+            <div id="container">
+                <h1>Admin Page</h1>
+            </div>
+            <div id="login_container" class="admin_page">
+                <h2>List of Pass/Fail Candidates</h2>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>License No</th>
+                        <th>Passed</th>
+                        <th>Examiner Comment</th>
+                    </tr>
+                    <% passFailUsers.forEach(user => { %>
+                        <tr>
+                            <td>
+                                <%= user.fname %>
+                                    <%= user.lname %>
+                            </td>
+                            <td>
+                                <%= user.licenseNo %>
+                            </td>
+                            <td>
+                                <%= user.isPassed ? 'Yes' : 'No' %>
+                            </td>
+                            <td>
+                                <%= user.examinerComment || 'N/A' %>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </table>
+            </div>
+            <%- include('./partials/footer.ejs') %>
+    </body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+
+
+    <body>
+        <%- include('./partials/nav.ejs', { authenticated: false }) %>
+            <div id="login_container">
+                <h1>Login</h1>
+                <% if (locals.loginError) { %>
+                    <div class="alert alert-danger">
+                        <p class="error-message">
+                            <%= loginError %>
+                        </p>
+                    </div>
+                    <% } %>
+                        <article class="mb-4">
+                            <div class="container px-4 px-lg-5">
+                                <div class="row gx-4 gx-lg-5 justify-content-center">
+                                    <div class="col-md-10 col-lg-8 col-xl-7">
+                                        <form method="post" action="/login">
+
+                                            <div class="form-floating mb-5">
+                                                <!-- <input class="form-control" type="text"  id="username" name="username" data-sb-validations="required" /> -->
+                                                <input class="form-control" type="text" id="username" name="username" required placeholder="Username" data-sb-validations="required">
+                                                <label for="username">Username</label>
+                                                <!-- <div class="invalid-feedback" data-sb-feedback="username:required">Username required.
+                                                </div> -->
+                                            </div>
+
+                                            <div class="form-floating mb-5">
+                                                <!-- <input type="password" class="form-control"  name="password" id="password" /> -->
+                                                <input type="password" class="form-control" name="password" id="password" required placeholder="Password">
+                                        <label for="password">Password</label>   
+                                                <!-- <div class="invalid-feedback" data-sb-feedback="password:required">Password required.
+                                                </div>  -->
+                                            </div>
+                                            <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">
+                                SUBMIT
+                            </button>
+                                            <p>New user? <a href="/signUp" class="signup-link">Sign Up</a></p>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+            </div>
+            <%- include('./partials/footer.ejs') %>
+
+    </body>
+
+</html>

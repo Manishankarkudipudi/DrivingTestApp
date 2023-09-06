@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+
+
+    <body>
+        <%- include('./partials/nav.ejs', { authenticated: false }) %>
+            <div id="login_container">
+                <h1>Sign Up</h1>
+                <% if (locals.signupError) { %>
+                    <p class="error-message">
+                        <%= signupError %>
+                    </p>
+                    <% } %>
+                        <article class="mb-4">
+                            <div class="container px-4 px-lg-5">
+                                <div class="row gx-4 gx-lg-5 justify-content-center">
+                                    <div class="col-md-10 col-lg-8 col-xl-7">
+                                        <form method="post" action="/signUp">
+
+                                            <div class="form-floating mb-5">
+                                                <input class="form-control" type="text"  id="username" name="username" data-sb-validations="required" />
+                                                <label for="username">Username</label>
+                                                <div class="invalid-feedback" data-sb-feedback="username:required">Username required.
+                                                </div>
+                                            </div>
+
+                                            <div class="form-floating mb-5">
+                                                <input type="password" class="form-control"  name="password" id="password" />
+
+                                                <label for="password">Password</label>
+                                                <div class="invalid-feedback" data-sb-feedback="password:required">Password required.
+                                                </div>
+                                            </div>
+                                            <div class="form-floating mb-5">
+                                                <input type="password" class="form-control"  name="rpassword" id="rpassword" />
+
+                                                <label for="password">Confirm Password</label>
+                                                <div class="invalid-feedback" data-sb-feedback="password:required">Password required.
+                                                </div>
+                                            </div>
+                                            <div class="form-floating mb-5">
+
+                                                <select class="form-select" id="userType" name="userType" required>
+                                    <option value="Driver">Driver</option>
+                                    <option value="Examiner">Examiner</option>
+                                    <option value="Admin">Admin</option>
+                                </select>
+                                            </div>
+                                            <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">
+                                SUBMIT
+                            </button>
+                                            <p>New user? <a href="/login" class="signup-link">Login</a></p>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+            </div>
+            <%- include('./partials/footer.ejs') %>
+
+    </body>
+
+</html>

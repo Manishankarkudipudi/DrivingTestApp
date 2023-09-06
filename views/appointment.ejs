@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<%-    include('./partials/head.ejs')     %>
+
+
+    <body>
+        <%- include('./partials/nav.ejs') %>
+            <div id="login_container">
+
+                <div class="container px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <h2>Add Appointments</h2>
+
+                            <% if (locals.successMessage) { %>
+                                <div class="alert alert-success" role="alert">
+                                    <%= successMessage %>
+                                </div>
+                            <% } %>
+                            
+
+                            <form action="/addAppointment" method="post">
+                                <div class="form-floating mb-5">
+                                    <input class="form-control" type="date" placeholder="Date" id="date" name="date" data-sb-validations="required" />
+                                    <label for="date">Date</label>
+                                    <div class="invalid-feedback" data-sb-feedback="date:required">date required.
+                                    </div>
+                                </div>
+
+                                <label for="time">Time Slot:</label>
+                                <br>
+                                <button type="submit" class="btn btn-primary text-uppercase col-4 mb-2" name="time" value="9:00">9:00
+                            AM</button>
+                                <button type="submit" class="btn btn-primary text-uppercase col-4 mb-2" name="time" value="9:30">9:30
+                            AM</button>
+                                <button type="submit" class="btn btn-primary text-uppercase col-4 mb-2" name="time" value="10:00">10:00
+                            AM</button>
+                                <button type="submit" class="btn btn-primary text-uppercase col-4 mb-2" name="time" value="10:30">10:30
+                            AM</button>
+                                <button type="submit" class="btn btn-primary text-uppercase col-4 mb-2" name="time" value="11:00">11:00
+                            AM</button>
+                                <button type="submit" class="btn btn-primary text-uppercase col-4 mb-2" name="time" value="11:30">11:30
+                            AM</button>
+                                <button type="submit" class="btn btn-primary text-uppercase col-4 mb-2" name="time" value="12:00">12:00
+                            PM</button>
+                                <button type="submit" class="btn btn-primary text-uppercase col-4 mb-2" name="time" value="12:30">12:30
+                            PM</button>
+                                <button type="submit" class="btn btn-primary text-uppercase col-4 mb-2" name="time" value="01:00">01:00
+                            PM</button>
+                                <button type="submit" class="btn btn-primary text-uppercase col-4 mb-2" name="time" value="01:30">01:30
+                            PM</button>
+                                <button type="submit" class="btn btn-primary text-uppercase col-4 mb-2" name="time" value="02:00">02:00
+                            PM</button>
+
+
+
+                            </form>
+
+
+                            <% if (locals.errorMessage) { %>
+                             
+                                <div class="alert alert-success" role="alert">
+                                    <%= errorMessage %>
+                                </div>
+                                <% } %>
+                                    <% if (appointments && appointments.length > 0) { %>
+                                        <h2 class="centered-title">Existing Appointments</h2>
+
+                                        <table class="table">
+                                            <tr>
+                                                <th class="date-col">Date</th>
+                                                <th class="time-col">Time</th>
+                                            </tr>
+                                            <% for (let appointment of appointments.slice(-3)) { %>
+                                                <tr>
+                                                    <td>
+                                                        <%= appointment.date %>
+                                                    </td>
+                                                    <td>
+                                                        <%= appointment.time %>
+                                                    </td>
+                                                </tr>
+                                            <% } %>
+                                            
+                                        </table>
+                                        <% } else { %>
+                                            <p>No appointments available.</p>
+                                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <%- include('./partials/footer.ejs') %>
+
+    </body>
+
+</html>
